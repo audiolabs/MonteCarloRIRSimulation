@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>helper package &mdash; RIRMonte 01 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="config module" href="config.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> RIRMonte
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readmelink.html">Readme File</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">montecarloroomsimulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="RIR_parameter.html">RIR_parameter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RIR_write_quaternion.html">RIR_write_quaternion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">helper package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-helper.ArrayStructures">helper.ArrayStructures module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-helper.Quaternions">helper.Quaternions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-helper.UniformSphericalSampling">helper.UniformSphericalSampling module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-helper.platonic_solids">helper.platonic_solids module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-helper">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RIRMonte</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">montecarloroomsimulation</a> &raquo;</li>
+        
+      <li>helper package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/helper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="helper-package">
+<h1>helper package<a class="headerlink" href="#helper-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-helper.ArrayStructures">
+<span id="helper-arraystructures-module"></span><h2>helper.ArrayStructures module<a class="headerlink" href="#module-helper.ArrayStructures" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="helper.ArrayStructures.CUA">
+<code class="sig-prename descclassname">helper.ArrayStructures.</code><code class="sig-name descname">CUA</code><span class="sig-paren">(</span><em class="sig-param">rad</em>, <em class="sig-param">num_mics</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.ArrayStructures.CUA" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rad</strong> – radius of the circular uniform array</p></li>
+<li><p><strong>num_mics</strong> – number of microphones</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>offset vectors for the CUA (real numbers)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="helper.ArrayStructures.SUA">
+<code class="sig-prename descclassname">helper.ArrayStructures.</code><code class="sig-name descname">SUA</code><span class="sig-paren">(</span><em class="sig-param">rad</em>, <em class="sig-param">num_mics</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.ArrayStructures.SUA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that samples a Sphere uniformly with num_mics microphones
+:param rad: radius of the sphere
+:param num_mics: number of microphones on the sphere
+:return: positions of the microphones on the sphere</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="helper.ArrayStructures.ULA">
+<code class="sig-prename descclassname">helper.ArrayStructures.</code><code class="sig-name descname">ULA</code><span class="sig-paren">(</span><em class="sig-param">imd</em>, <em class="sig-param">num_mics</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.ArrayStructures.ULA" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imd</strong> – inter-microphone distances</p></li>
+<li><p><strong>num_mics</strong> – number of microphones</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>offset vectors for the ULA to the array center (real numbers)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="helper.ArrayStructures.sample_circle">
+<code class="sig-prename descclassname">helper.ArrayStructures.</code><code class="sig-name descname">sample_circle</code><span class="sig-paren">(</span><em class="sig-param">num</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.ArrayStructures.sample_circle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num</strong> – number of circle points to be sampled</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>complex samples (2D) for the microphone positions</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-helper.Quaternions">
+<span id="helper-quaternions-module"></span><h2>helper.Quaternions module<a class="headerlink" href="#module-helper.Quaternions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="helper.Quaternions.QuatProc">
+<em class="property">class </em><code class="sig-prename descclassname">helper.Quaternions.</code><code class="sig-name descname">QuatProc</code><a class="headerlink" href="#helper.Quaternions.QuatProc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class processes quaternions</p>
+<dl class="method">
+<dt id="helper.Quaternions.QuatProc.conjug">
+<code class="sig-name descname">conjug</code><span class="sig-paren">(</span><em class="sig-param">qut1</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.Quaternions.QuatProc.conjug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that conjugates a Quarternion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>qut1</strong> (<a class="reference internal" href="#helper.Quaternions.Quaternion" title="helper.Quaternions.Quaternion"><em>Quaternion</em></a>) – First Quarternion</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Second Quarternion which contains the result of the conjugation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#helper.Quaternions.Quaternion" title="helper.Quaternions.Quaternion">Quaternion</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="helper.Quaternions.QuatProc.multiply">
+<code class="sig-name descname">multiply</code><span class="sig-paren">(</span><em class="sig-param">qut1</em>, <em class="sig-param">qut2</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.Quaternions.QuatProc.multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that multiplies two quarternions
+Multiplies two input quarternions by getting a multiplication matrix from the second one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qut1</strong> (<a class="reference internal" href="#helper.Quaternions.Quaternion" title="helper.Quaternions.Quaternion"><em>Quaternion</em></a>) – First Quarternion</p></li>
+<li><p><strong>qut2</strong> (<a class="reference internal" href="#helper.Quaternions.Quaternion" title="helper.Quaternions.Quaternion"><em>Quaternion</em></a>) – Second Quarternion</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Third Quarternion which contains the result of the multiplication</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#helper.Quaternions.Quaternion" title="helper.Quaternions.Quaternion">Quaternion</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="helper.Quaternions.QuatProc.random_rotation">
+<code class="sig-name descname">random_rotation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#helper.Quaternions.QuatProc.random_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a random rotation vector Be aware that just uniformly creating a random vector is wrong, it has to be sampled from a normal distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return rv</dt>
+<dd class="field-odd"><p>vector pointing in a random direction</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="helper.Quaternions.QuatProc.rotate">
+<code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param">angle</em>, <em class="sig-param">rotation_axis</em>, <em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.Quaternions.QuatProc.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that rotates a point around an axis using quarternions
+Rotation of point around axis by translating the point and
+the axis in quarternion coordinates and multiplying those accordingly</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle</strong> (<em>float</em>) – Angle between 0 and 2 pi to rotate the point</p></li>
+<li><p><strong>rotation_axis</strong> – (np.array([a,b,c])) 3-dim axis to rotate around</p></li>
+<li><p><strong>qut1</strong> – First Quarternion</p></li>
+<li><p><strong>point</strong> – (np.array([a,b,c])) Point to rotate around rotation axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>rp (np.array([a,b,c])): rotated point</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="helper.Quaternions.Quaternion">
+<em class="property">class </em><code class="sig-prename descclassname">helper.Quaternions.</code><code class="sig-name descname">Quaternion</code><span class="sig-paren">(</span><em class="sig-param">w</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">z</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.Quaternions.Quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This it the quaternion class, where x, y z are the 2. 3. and 4. quaternion dimension and the first dimension is zero (If a point is to be translated to an quaternion). If the quaternion is used for rotation it is ([cos(angle/2), sin(angle/2)*x, sin(angle/2)*y, sin(angle/2)*z]) where angle is the angle to rotate around vector x y z</p>
+</dd></dl>
+
+</section>
+<section id="module-helper.UniformSphericalSampling">
+<span id="helper-uniformsphericalsampling-module"></span><h2>helper.UniformSphericalSampling module<a class="headerlink" href="#module-helper.UniformSphericalSampling" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="helper.UniformSphericalSampling.sample_halfsphere_uniformly_geometric">
+<code class="sig-prename descclassname">helper.UniformSphericalSampling.</code><code class="sig-name descname">sample_halfsphere_uniformly_geometric</code><span class="sig-paren">(</span><em class="sig-param">N</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.UniformSphericalSampling.sample_halfsphere_uniformly_geometric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample a halfsphere uniformly
+This function creates azimuth and elevation angles such that they uniformly sample a sphere surface with N points
+Implementation according to
+&lt;&lt; Comments on Generating sensor signals in isotropic noise fields &gt;&gt;
+E. A. P. Habets and S. Gannot (2010)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>N</strong> (<em>int</em>) – approx. Number of points on the sphere</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>azimuth angle between - pi and pi and elevation angle between -pi/2 and pi/2</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="helper.UniformSphericalSampling.sample_halfsphere_uniformly_stochastic">
+<code class="sig-prename descclassname">helper.UniformSphericalSampling.</code><code class="sig-name descname">sample_halfsphere_uniformly_stochastic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#helper.UniformSphericalSampling.sample_halfsphere_uniformly_stochastic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="helper.UniformSphericalSampling.sample_sphere_uniformly2_stochastic">
+<code class="sig-prename descclassname">helper.UniformSphericalSampling.</code><code class="sig-name descname">sample_sphere_uniformly2_stochastic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#helper.UniformSphericalSampling.sample_sphere_uniformly2_stochastic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample a sphere uniformly
+This function creates azimuth and elevation angles such that they uniformly sample a sphere surface</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>azimuth angle between - pi and pi and elevation angle between -pi/2 and pi/2</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="helper.UniformSphericalSampling.sample_sphere_uniformly_geometric">
+<code class="sig-prename descclassname">helper.UniformSphericalSampling.</code><code class="sig-name descname">sample_sphere_uniformly_geometric</code><span class="sig-paren">(</span><em class="sig-param">N</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.UniformSphericalSampling.sample_sphere_uniformly_geometric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample a sphere uniformly
+This function creates azimuth and elevation angles such that they uniformly sample a sphere surface with N points
+Implementation according to
+&lt;&lt; Comments on Generating sensor signals in isotropic noise fields &gt;&gt;
+E. A. P. Habets and S. Gannot (2010)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>N</strong> (<em>int</em>) – Number of points on the sphere</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>azimuth angle between - pi and pi and elevation angle between -pi/2 and pi/2</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="helper.UniformSphericalSampling.sample_sphere_uniformly_stochastic">
+<code class="sig-prename descclassname">helper.UniformSphericalSampling.</code><code class="sig-name descname">sample_sphere_uniformly_stochastic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#helper.UniformSphericalSampling.sample_sphere_uniformly_stochastic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample a sphere uniformly
+This function creates azimuth and elevation angles such that they uniformly sample a sphere surface</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>azimuth angle between - pi and pi and elevation angle between -pi/2 and pi/2</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-helper.platonic_solids">
+<span id="helper-platonic-solids-module"></span><h2>helper.platonic_solids module<a class="headerlink" href="#module-helper.platonic_solids" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="helper.platonic_solids.Cube">
+<em class="property">class </em><code class="sig-prename descclassname">helper.platonic_solids.</code><code class="sig-name descname">Cube</code><a class="headerlink" href="#helper.platonic_solids.Cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#helper.platonic_solids.PlatonicSolid" title="helper.platonic_solids.PlatonicSolid"><code class="xref py py-class docutils literal notranslate"><span class="pre">helper.platonic_solids.PlatonicSolid</span></code></a></p>
+<dl class="attribute">
+<dt id="helper.platonic_solids.Cube.coordinates">
+<code class="sig-name descname">coordinates</code><em class="property"> = array([[ 1,  1,  1],        [ 1,  1, -1],        [ 1, -1, -1],        [ 1, -1,  1],        [-1, -1,  1],        [-1, -1, -1],        [-1,  1, -1],        [-1,  1,  1]])</em><a class="headerlink" href="#helper.platonic_solids.Cube.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="helper.platonic_solids.Dodecahedron">
+<em class="property">class </em><code class="sig-prename descclassname">helper.platonic_solids.</code><code class="sig-name descname">Dodecahedron</code><a class="headerlink" href="#helper.platonic_solids.Dodecahedron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#helper.platonic_solids.PlatonicSolid" title="helper.platonic_solids.PlatonicSolid"><code class="xref py py-class docutils literal notranslate"><span class="pre">helper.platonic_solids.PlatonicSolid</span></code></a></p>
+<dl class="attribute">
+<dt id="helper.platonic_solids.Dodecahedron.coordinates">
+<code class="sig-name descname">coordinates</code><em class="property"> = array([[ 1.        ,  1.        ,  1.        ],        [ 1.        ,  1.        , -1.        ],        [ 1.        , -1.        ,  1.        ],        [ 1.        , -1.        , -1.        ],        [-1.        ,  1.        ,  1.        ],        [-1.        ,  1.        , -1.        ],        [-1.        , -1.        ,  1.        ],        [-1.        , -1.        , -1.        ],        [ 0.        ,  0.61803399,  1.61803399],        [ 0.        ,  0.61803399, -1.61803399],        [ 0.        , -0.61803399,  1.61803399],        [ 0.        , -0.61803399, -1.61803399],        [ 0.61803399,  1.61803399,  0.        ],        [ 0.61803399, -1.61803399,  0.        ],        [-0.61803399,  1.61803399,  0.        ],        [-0.61803399, -1.61803399,  0.        ],        [ 1.61803399,  0.        ,  0.61803399],        [ 1.61803399,  0.        , -0.61803399],        [-1.61803399,  0.        ,  0.61803399],        [-1.61803399,  0.        , -0.61803399]])</em><a class="headerlink" href="#helper.platonic_solids.Dodecahedron.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="helper.platonic_solids.Icosahedron">
+<em class="property">class </em><code class="sig-prename descclassname">helper.platonic_solids.</code><code class="sig-name descname">Icosahedron</code><a class="headerlink" href="#helper.platonic_solids.Icosahedron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#helper.platonic_solids.PlatonicSolid" title="helper.platonic_solids.PlatonicSolid"><code class="xref py py-class docutils literal notranslate"><span class="pre">helper.platonic_solids.PlatonicSolid</span></code></a></p>
+<dl class="attribute">
+<dt id="helper.platonic_solids.Icosahedron.coordinates">
+<code class="sig-name descname">coordinates</code><em class="property"> = array([[ 0.        ,  1.        ,  1.61803399],        [ 0.        ,  1.        , -1.61803399],        [ 0.        , -1.        ,  1.61803399],        [ 0.        , -1.        , -1.61803399],        [ 1.        ,  1.61803399,  0.        ],        [ 1.        , -1.61803399,  0.        ],        [-1.        ,  1.61803399,  0.        ],        [-1.        , -1.61803399,  0.        ],        [ 1.61803399,  0.        ,  1.        ],        [ 1.61803399,  0.        , -1.        ],        [-1.61803399,  0.        ,  1.        ],        [-1.61803399,  0.        , -1.        ]])</em><a class="headerlink" href="#helper.platonic_solids.Icosahedron.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="helper.platonic_solids.Octahedron">
+<em class="property">class </em><code class="sig-prename descclassname">helper.platonic_solids.</code><code class="sig-name descname">Octahedron</code><a class="headerlink" href="#helper.platonic_solids.Octahedron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#helper.platonic_solids.PlatonicSolid" title="helper.platonic_solids.PlatonicSolid"><code class="xref py py-class docutils literal notranslate"><span class="pre">helper.platonic_solids.PlatonicSolid</span></code></a></p>
+<dl class="attribute">
+<dt id="helper.platonic_solids.Octahedron.coordinates">
+<code class="sig-name descname">coordinates</code><em class="property"> = array([[ 1,  0,  0],        [ 0,  1,  0],        [-1,  0,  0],        [ 0,  0,  1],        [ 0, -1,  0],        [ 0,  0, -1]])</em><a class="headerlink" href="#helper.platonic_solids.Octahedron.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="helper.platonic_solids.PlatonicSolid">
+<em class="property">class </em><code class="sig-prename descclassname">helper.platonic_solids.</code><code class="sig-name descname">PlatonicSolid</code><a class="headerlink" href="#helper.platonic_solids.PlatonicSolid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="helper.platonic_solids.PlatonicSolid.calc_coordinates">
+<em class="property">classmethod </em><code class="sig-name descname">calc_coordinates</code><span class="sig-paren">(</span><em class="sig-param">circumradius</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.platonic_solids.PlatonicSolid.calc_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="helper.platonic_solids.Tetrahedron">
+<em class="property">class </em><code class="sig-prename descclassname">helper.platonic_solids.</code><code class="sig-name descname">Tetrahedron</code><a class="headerlink" href="#helper.platonic_solids.Tetrahedron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#helper.platonic_solids.PlatonicSolid" title="helper.platonic_solids.PlatonicSolid"><code class="xref py py-class docutils literal notranslate"><span class="pre">helper.platonic_solids.PlatonicSolid</span></code></a></p>
+<dl class="attribute">
+<dt id="helper.platonic_solids.Tetrahedron.coordinates">
+<code class="sig-name descname">coordinates</code><em class="property"> = array([[ 1,  1,  1],        [ 1, -1, -1],        [-1,  1, -1],        [-1, -1,  1]])</em><a class="headerlink" href="#helper.platonic_solids.Tetrahedron.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="helper.platonic_solids.is_platonic_number">
+<code class="sig-prename descclassname">helper.platonic_solids.</code><code class="sig-name descname">is_platonic_number</code><span class="sig-paren">(</span><em class="sig-param">num</em><span class="sig-paren">)</span><a class="headerlink" href="#helper.platonic_solids.is_platonic_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-helper">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-helper" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="config.html" class="btn btn-neutral float-left" title="config module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Wolfgang Mack
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

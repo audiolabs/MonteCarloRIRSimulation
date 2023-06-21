@@ -1,0 +1,38 @@
+helper package
+==============
+
+Submodules
+----------
+
+helper.ArrayStructures module
+-----------------------------
+
+.. automodule:: helper.ArrayStructures
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+helper.Quaternions module
+-------------------------
+
+.. automodule:: helper.Quaternions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+helper.UniformSphericalSampling module
+--------------------------------------
+
+.. automodule:: helper.UniformSphericalSampling
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: helper
+   :members:
+   :undoc-members:
+   :show-inheritance:
