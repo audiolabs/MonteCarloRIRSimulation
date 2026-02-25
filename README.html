@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Impulse Response Simulation for Various Array Architectures Using Monte-Carlo Simulation and Quaternions &mdash; RIRMonte 01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=30f05f40" />
+
+  
+      <script src="_static/jquery.js?v=5be48651"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=da426f59"></script>
+      <script src="_static/doctools.js?v=695de88e"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MonteCarloRIRSimulation" href="modules.html" />
+    <link rel="prev" title="Readme File" href="readmelink.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RIRMonte
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="readmelink.html">Readme File</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Room Impulse Response Simulation for Various Array Architectures Using Monte-Carlo Simulation and Quaternions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#here-we-learn-how-to-use-the-provided-library-to">Here we learn how to use the provided library to</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#to-speed-things-up-go-to-the-end-and-learn-how-to-use-the-python-files-with-parallel">(to speed things up, go to the end and learn how to use the python files with parallel!)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sampling-a-sphere-uniformly">Sampling a Sphere Uniformly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generate-the-microphone-positions-uniform-linear-arrays-circular-linear-arrays-and-spherical-linear-arrays">Generate the Microphone Positions Uniform-Linear Arrays, Circular Linear Arrays, and Spherical Linear Arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-quaternions-to-translate-azimuth-and-elevation-to-pointing-vectors">Using Quaternions to translate azimuth and elevation to pointing vectors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#randomly-rotating-the-microphone-positions-and-the-respective-source-positions">Randomly rotating the microphone positions and the respective source positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-source-to-the-microphone-array-with-a-certain-distance-is-quite-easy-just-use-the-same-procedure">Adding a source to the microphone Array with a certain distance is quite easy … just use the same procedure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#placing-the-array-and-the-source-in-a-room-of-certain-shape-with-a-specified-minimum-distance-to-walls">Placing the Array and the Source in a Room of certain shape with a specified minimum distance to walls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-room-impulse-responses">Generate Room Impulse Responses</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#to-speed-things-up-the-process-of-rir-generation-is-parallelized-with-gnu-parallel-you-can-use-it-via">To speed things up, the process of RIR generation is parallelized with GNU parallel. You can use it via</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examplary-loading-of-a-file-generated-from-the-default-config">Examplary loading of a  file generated from the default config</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">MonteCarloRIRSimulation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RIRMonte</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="readmelink.html">Readme File</a></li>
+      <li class="breadcrumb-item active">Room Impulse Response Simulation for Various Array Architectures Using Monte-Carlo Simulation and Quaternions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="room-impulse-response-simulation-for-various-array-architectures-using-monte-carlo-simulation-and-quaternions">
+<h1>Room Impulse Response Simulation for Various Array Architectures Using Monte-Carlo Simulation and Quaternions<a class="headerlink" href="#room-impulse-response-simulation-for-various-array-architectures-using-monte-carlo-simulation-and-quaternions" title="Link to this heading"></a></h1>
+<p>This tool simulates the microphone positions of spherical, circular, uniform linear, or custom microphone arrays, as well as a source position in a given distance. The positions are randomly rotated and located in a room with a given minimum wall distance. Using these positions, room impulse responses can be simulated. For more details about the function see: <a class="reference external" href="http://audiolabs.github.io/MonteCarloRIRSimulation">http://audiolabs.github.io/MonteCarloRIRSimulation</a></p>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<p>Step 0: Install GNU parallel on your system</p>
+<p>Step 1: Clone the project</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">audiolabs</span><span class="o">/</span><span class="n">MonteCarloRIRSimulation</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Step 2: Install the environment</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<section id="here-we-learn-how-to-use-the-provided-library-to">
+<h1>Here we learn how to use the provided library to<a class="headerlink" href="#here-we-learn-how-to-use-the-provided-library-to" title="Link to this heading"></a></h1>
+</section>
+<section id="to-speed-things-up-go-to-the-end-and-learn-how-to-use-the-python-files-with-parallel">
+<h1>(to speed things up, go to the end and learn how to use the python files with parallel!)<a class="headerlink" href="#to-speed-things-up-go-to-the-end-and-learn-how-to-use-the-python-files-with-parallel" title="Link to this heading"></a></h1>
+<ol class="arabic simple">
+<li><p>Uniformly (stochastically and geometrically) sample a sphere</p></li>
+<li><p>Generate common and custom array architectures</p></li>
+<li><p>Rotate these architectures + sources</p></li>
+<li><p>Use all the before to generate room impulse responses for the array</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper.ArrayStructures</span><span class="w"> </span><span class="kn">import</span> <span class="n">SUA</span><span class="p">,</span> <span class="n">ULA</span><span class="p">,</span> <span class="n">CUA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits</span><span class="w"> </span><span class="kn">import</span> <span class="n">mplot3d</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="c1"># Data for three-dimensional scattered points</span>
+    <span class="n">xdata</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ydata</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">zdata</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter3D</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">zdata</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greens&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="sampling-a-sphere-uniformly">
+<h2>Sampling a Sphere Uniformly<a class="headerlink" href="#sampling-a-sphere-uniformly" title="Link to this heading"></a></h2>
+<p>Here we evaluate three methods to sample a sphere geometrically (1) or stochastically (2,3).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper.UniformSphericalSampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">sample_sphere_uniformly_geometric</span><span class="p">,</span> <span class="n">sample_sphere_uniformly_stochastic</span><span class="p">,</span> <span class="n">sample_sphere_uniformly2_stochastic</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">visualize_sampling</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">pointsg</span> <span class="o">=</span> <span class="n">sample_sphere_uniformly_geometric</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+    <span class="n">pointsg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">pointsg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pointsg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Geometric Sampling: Azimuth and Elevation of different points&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pointsg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Elevation&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">pointss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span> <span class="n">sample_sphere_uniformly_stochastic</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">)])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">pointss</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Stochastic Sampling: Azimuth and Elevation of different points&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">pointss</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Elevation&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">pointss2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span> <span class="n">sample_sphere_uniformly2_stochastic</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">)])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">pointss2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Stochastic Sampling2: Azimuth and Elevation of different points&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">pointss2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Elevation&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_points</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">visualize_sampling</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;For a high number of samples there is no difference between stochastic and geometric sampling as the distribution of azimuth and elevation angles looks equivalent&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">For</span> <span class="n">a</span> <span class="n">high</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">difference</span> <span class="n">between</span> <span class="n">stochastic</span> <span class="ow">and</span> <span class="n">geometric</span> <span class="n">sampling</span> <span class="k">as</span> <span class="n">the</span> <span class="n">distribution</span> <span class="n">of</span> <span class="n">azimuth</span> <span class="ow">and</span> <span class="n">elevation</span> <span class="n">angles</span> <span class="n">looks</span> <span class="n">equivalent</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_7_1.png"><img alt="png" src="_images/HowToNotebook_7_1.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_7_2.png"><img alt="png" src="_images/HowToNotebook_7_2.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_7_3.png"><img alt="png" src="_images/HowToNotebook_7_3.png" />
+</a>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;For few samples, geometric sampling is preferred as it samples the azimuth and elevations pace appropriately also for a low number of points&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;For placing microphones equidistantly on a sphere, only geometric sampling can be used&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;For randomly determining source positions, also stochastic sampling can be used (for a large number of points)&#39;</span><span class="p">)</span>
+<span class="n">num_points</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">visualize_sampling</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">For</span> <span class="n">few</span> <span class="n">samples</span><span class="p">,</span> <span class="n">geometric</span> <span class="n">sampling</span> <span class="ow">is</span> <span class="n">preferred</span> <span class="k">as</span> <span class="n">it</span> <span class="n">samples</span> <span class="n">the</span> <span class="n">azimuth</span> <span class="ow">and</span> <span class="n">elevations</span> <span class="n">pace</span> <span class="n">appropriately</span> <span class="n">also</span> <span class="k">for</span> <span class="n">a</span> <span class="n">low</span> <span class="n">number</span> <span class="n">of</span> <span class="n">points</span>
+<span class="n">For</span> <span class="n">placing</span> <span class="n">microphones</span> <span class="n">equidistantly</span> <span class="n">on</span> <span class="n">a</span> <span class="n">sphere</span><span class="p">,</span> <span class="n">only</span> <span class="n">geometric</span> <span class="n">sampling</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span>
+<span class="n">For</span> <span class="n">randomly</span> <span class="n">determining</span> <span class="n">source</span> <span class="n">positions</span><span class="p">,</span> <span class="n">also</span> <span class="n">stochastic</span> <span class="n">sampling</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="p">(</span><span class="k">for</span> <span class="n">a</span> <span class="n">large</span> <span class="n">number</span> <span class="n">of</span> <span class="n">points</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_8_1.png"><img alt="png" src="_images/HowToNotebook_8_1.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_8_2.png"><img alt="png" src="_images/HowToNotebook_8_2.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_8_3.png"><img alt="png" src="_images/HowToNotebook_8_3.png" />
+</a>
+<section id="generate-the-microphone-positions-uniform-linear-arrays-circular-linear-arrays-and-spherical-linear-arrays">
+<h3>Generate the Microphone Positions Uniform-Linear Arrays, Circular Linear Arrays, and Spherical Linear Arrays<a class="headerlink" href="#generate-the-microphone-positions-uniform-linear-arrays-circular-linear-arrays-and-spherical-linear-arrays" title="Link to this heading"></a></h3>
+<p>Using geometric sampling, we can place points approximately equidistantly on a sphere. We can translate the azimuth and elevation angles to vectors pointing from the sphere center to the respective positions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">RIR_write_quaternion</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_source_vec</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># 1 Get azimuth and elevation geometrically determined</span>
+<span class="n">pointsg</span> <span class="o">=</span> <span class="n">sample_sphere_uniformly_geometric</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="c1"># 2 Translate azimuth and elevation to pointing vectors</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">vecs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pointsg</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+    <span class="n">vecs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generate_source_vec</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">pointsg</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">a</span><span class="p">],</span> <span class="n">pointsg</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">a</span><span class="p">]))</span>
+<span class="c1"># 3 Visualize points on the sphere</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">vecs</span><span class="p">),</span><span class="s1">&#39;Equidistantly Sampled Sphere&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_11_0.png"><img alt="png" src="_images/HowToNotebook_11_0.png" />
+</a>
+<p>The procedure is included in from helper.ArrayStructures import SUA, ULA, CUA to generate the respective array structures: spherical uniform array (SUA), uniform-linear array (ULA), circular uniform array (CUA)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create &#39;num_microphones&#39; microphone positions for a spherical uniform array with radius/length &#39;radius&#39;.</span>
+<span class="c1"># We use a geometric sampling such that the points have approximate equal distance on a sphere (exact equal distance is mathematically not possible for an arbitrary number of points, if it is possible, the microphone-distances are exactly the same)</span>
+<span class="n">num_microphones</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># for a uniform-linear array (ULA) radius specifies the inter-microphone distance; In spherical uniform array (SUA) and  circular uniform array (CUA), radius specifies the distance of each microphone to the array center</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="p">[</span><span class="n">SUA</span><span class="p">,</span> <span class="n">ULA</span><span class="p">,</span> <span class="n">CUA</span><span class="p">]:</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span><span class="n">num_microphones</span><span class="p">)</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="n">array</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># With more points</span>
+<span class="n">num_microphones</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="p">[</span><span class="n">SUA</span><span class="p">]:</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span><span class="n">num_microphones</span><span class="p">)</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="n">array</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span> <span class="s1">&#39; with more points&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_13_0.png"><img alt="png" src="_images/HowToNotebook_13_0.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_13_1.png"><img alt="png" src="_images/HowToNotebook_13_1.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_13_2.png"><img alt="png" src="_images/HowToNotebook_13_2.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_13_3.png"><img alt="png" src="_images/HowToNotebook_13_3.png" />
+</a>
+</section>
+<section id="using-quaternions-to-translate-azimuth-and-elevation-to-pointing-vectors">
+<h3>Using Quaternions to translate azimuth and elevation to pointing vectors<a class="headerlink" href="#using-quaternions-to-translate-azimuth-and-elevation-to-pointing-vectors" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper.Quaternions</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuatProc</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a circular uniform array from scratch</span>
+<span class="c1"># 1 Define a start coordinate</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># 2 Define a vector to form the circular array around (orthogonal to start vector)</span>
+<span class="n">ref_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># 3 Define the number of microphones</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="c1"># 4 Initialize the Quaternion Processer ... it is basically a matrix storage that knows how to do the matrix mutliplication accordingly</span>
+<span class="c1"># Initialize Quaternion Processer</span>
+<span class="n">proc</span> <span class="o">=</span> <span class="n">QuatProc</span><span class="p">()</span>
+<span class="c1"># 5 Define delta rotation angle to get a full circle of the CUA</span>
+<span class="n">rot_angle</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">num_points</span>
+<span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_points</span><span class="p">):</span>
+    <span class="c1"># now rotate each vector according to the respective angle difference rot_angle</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rot_angle</span><span class="p">,</span><span class="n">ref_vec</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+    <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="s1">&#39;CUA&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;To change the radius, just multiply all vectors with the same number&#39;</span><span class="p">)</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="o">*</span><span class="n">radius</span><span class="p">,</span><span class="s1">&#39;CUA with larger radius&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">To</span> <span class="n">change</span> <span class="n">the</span> <span class="n">radius</span><span class="p">,</span> <span class="n">just</span> <span class="n">multiply</span> <span class="nb">all</span> <span class="n">vectors</span> <span class="k">with</span> <span class="n">the</span> <span class="n">same</span> <span class="n">number</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_16_1.png"><img alt="png" src="_images/HowToNotebook_16_1.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_16_2.png"><img alt="png" src="_images/HowToNotebook_16_2.png" />
+</a>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can also make for customized shapes by setting azimuth and elevation respectively, here are some examples:</span>
+
+<span class="c1"># Lets simplify things again by using &#39;generate_source_vec&#39;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">RIR_write_quaternion</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_source_vec</span>
+<span class="c1"># To make things more difficult, we shift every microphone position by +- pi/16 in elevation using &#39;generate_source_vec&#39;</span>
+<span class="n">azimuths</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">num_points</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="n">shifted_points</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+    <span class="n">elevation</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">16</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">generate_source_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">azimuths</span><span class="p">[</span><span class="n">a</span><span class="p">],</span><span class="n">elevation</span><span class="p">)</span>
+    <span class="n">shifted_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="n">shifted_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shifted_points</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">shifted_points</span><span class="p">,</span> <span class="s1">&#39;Shifted CUA&#39;</span><span class="p">)</span>
+
+<span class="c1"># Or increase the elevation ... till it surpasses+-pi/2 and decreases again</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">RIR_write_quaternion</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_source_vec</span>
+<span class="n">azimuths</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">num_points</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="n">shifted_points</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+    <span class="n">elevation</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">16</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">generate_source_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">azimuths</span><span class="p">[</span><span class="n">a</span><span class="p">],</span><span class="n">elevation</span><span class="p">)</span>
+    <span class="n">shifted_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="n">shifted_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shifted_points</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">shifted_points</span><span class="p">,</span><span class="s1">&#39;Increasing/Decreasing Elevation&#39;</span><span class="p">)</span>
+<span class="c1"># More custom shapes are up to you, just specify azimuth and elevation pairs in generate_source_vec</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_17_0.png"><img alt="png" src="_images/HowToNotebook_17_0.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_17_1.png"><img alt="png" src="_images/HowToNotebook_17_1.png" />
+</a>
+</section>
+<section id="randomly-rotating-the-microphone-positions-and-the-respective-source-positions">
+<h3>Randomly rotating the microphone positions and the respective source positions<a class="headerlink" href="#randomly-rotating-the-microphone-positions-and-the-respective-source-positions" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># use increasing/decreasing elevation from above:</span>
+<span class="n">azimuths</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">num_points</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="n">shifted_points</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+    <span class="n">elevation</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">16</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">generate_source_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">azimuths</span><span class="p">[</span><span class="n">a</span><span class="p">],</span><span class="n">elevation</span><span class="p">)</span>
+    <span class="n">shifted_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="n">shifted_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shifted_points</span><span class="p">)</span>
+<span class="c1">##### Just use different points if you want to see another microphone array</span>
+
+<span class="n">proc</span> <span class="o">=</span> <span class="n">QuatProc</span><span class="p">()</span>
+<span class="c1"># get random rotation vector (reference vector to rotate around)</span>
+<span class="n">rv</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">random_rotation</span><span class="p">()</span>
+<span class="c1"># get a random angle (uniformly sampled) between 0 and 2 pi to rotate around rv</span>
+<span class="n">rangle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shifted_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rangle</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">shifted_points</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="o">...</span><span class="p">]))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">shifted_points</span><span class="p">,</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">res</span><span class="p">),</span><span class="s1">&#39;Rotated&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_19_0.png"><img alt="png" src="_images/HowToNotebook_19_0.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_19_1.png"><img alt="png" src="_images/HowToNotebook_19_1.png" />
+</a>
+</section>
+<section id="adding-a-source-to-the-microphone-array-with-a-certain-distance-is-quite-easy-just-use-the-same-procedure">
+<h3>Adding a source to the microphone Array with a certain distance is quite easy … just use the same procedure<a class="headerlink" href="#adding-a-source-to-the-microphone-array-with-a-certain-distance-is-quite-easy-just-use-the-same-procedure" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1 Get the microphone points for a CUA</span>
+<span class="n">num_mics</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">mic</span> <span class="o">=</span> <span class="n">CUA</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span><span class="n">num_mics</span><span class="p">)</span>
+<span class="c1"># 2 Get a source lets say at elevation = 45 and azimuth = 0 in 2 m distance</span>
+<span class="n">source_dist</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">azimuth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">elevation</span> <span class="o">=</span>  <span class="mi">45</span><span class="o">/</span><span class="mf">360.</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="c1"># 3 Let the source move around</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">generate_source_vec</span><span class="p">(</span><span class="n">source_dist</span><span class="p">,</span> <span class="n">azimuth</span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="n">elevation</span><span class="p">)</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mic</span><span class="p">,</span><span class="n">source</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">...</span><span class="p">]],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span><span class="s1">&#39;Array and Source&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_21_0.png"><img alt="png" src="_images/HowToNotebook_21_0.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_21_1.png"><img alt="png" src="_images/HowToNotebook_21_1.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_21_2.png"><img alt="png" src="_images/HowToNotebook_21_2.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_21_3.png"><img alt="png" src="_images/HowToNotebook_21_3.png" />
+</a>
+<p>As both, array and source are centered around zero, the whole construct can be rotated using random vectors (as above):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mic</span><span class="p">,</span><span class="n">source</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">...</span><span class="p">]])</span>
+<span class="n">proc</span> <span class="o">=</span> <span class="n">QuatProc</span><span class="p">()</span>
+<span class="c1"># get random rotation vector (reference vector to rotate around)</span>
+<span class="n">rv</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">random_rotation</span><span class="p">()</span>
+<span class="c1"># get a random angle (uniformly sampled) between 0 and 2 pi to rotate around rv</span>
+<span class="n">rangle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vecs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rangle</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">vecs</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="o">...</span><span class="p">]))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">vecs</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">res</span><span class="p">),</span> <span class="s1">&#39;Rotated&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_23_0.png"><img alt="png" src="_images/HowToNotebook_23_0.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_23_1.png"><img alt="png" src="_images/HowToNotebook_23_1.png" />
+</a>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you want to use a user-defined rotation, just do so, e.g.,</span>
+<span class="n">rot_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vecs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">rot_vec</span><span class="p">,</span> <span class="n">vecs</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="o">...</span><span class="p">]))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">vecs</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">res</span><span class="p">),</span> <span class="s1">&#39;Rotated around pi/2&#39;</span><span class="p">)</span>
+<span class="c1"># You see that the array center is always at [0,0,0], so the rotation has to be performed before putting the array in the room!</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_24_0.png"><img alt="png" src="_images/HowToNotebook_24_0.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_24_1.png"><img alt="png" src="_images/HowToNotebook_24_1.png" />
+</a>
+</section>
+<section id="placing-the-array-and-the-source-in-a-room-of-certain-shape-with-a-specified-minimum-distance-to-walls">
+<h3>Placing the Array and the Source in a Room of certain shape with a specified minimum distance to walls<a class="headerlink" href="#placing-the-array-and-the-source-in-a-room-of-certain-shape-with-a-specified-minimum-distance-to-walls" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">RIR_write_quaternion</span><span class="w"> </span><span class="kn">import</span> <span class="n">sample_room</span>
+<span class="err">?</span><span class="n">sample_room</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a point in the room with a minimal distance to walls wdist [m]</span>
+<span class="n">room</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># width, length, height</span>
+<span class="n">wdist</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">room_point</span> <span class="o">=</span> <span class="n">sample_room</span><span class="p">(</span><span class="n">room</span><span class="p">,</span><span class="n">wdist</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the room point to the (rotated) microphone positions and the source position such that they are placed in the room</span>
+<span class="n">room_poses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mic</span><span class="p">,</span><span class="n">source</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">...</span><span class="p">]],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">room_point</span>
+<span class="c1"># these positions can now be used in the rir-generator ... if they are valid-&gt; next: test for validity</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check whether all positions are still within the safety margin (wdist) of the room</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">RIR_write_quaternion</span><span class="w"> </span><span class="kn">import</span> <span class="n">verify_positions</span>
+<span class="c1"># save all array/source coordinates in a room for s samples</span>
+<span class="n">s</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">room_points</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">mics</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="c1">#1 Make the array positions</span>
+    <span class="n">num_mics</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="n">mic</span> <span class="o">=</span> <span class="n">CUA</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span><span class="n">num_mics</span><span class="p">)</span>
+
+    <span class="c1">#2 make the source coordinate</span>
+    <span class="n">source_dist</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">azimuth</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">elevation</span> <span class="o">=</span>  <span class="mi">45</span><span class="o">/</span><span class="mf">360.</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">generate_source_vec</span><span class="p">(</span><span class="n">source_dist</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">,</span><span class="n">elevation</span><span class="p">)</span>
+
+    <span class="c1">#3 define the room</span>
+    <span class="n">room</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">room_point</span> <span class="o">=</span> <span class="n">sample_room</span><span class="p">(</span><span class="n">room</span><span class="p">,</span> <span class="n">wdist</span><span class="p">)</span>
+
+    <span class="c1">#4 check whether every coordinate is in the room and does not cut wdist</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">verify_positions</span><span class="p">(</span><span class="n">room</span><span class="p">,</span> <span class="n">mic</span> <span class="o">+</span> <span class="n">room_point</span><span class="p">,</span> <span class="n">source</span> <span class="o">+</span> <span class="n">room_point</span><span class="p">,</span> <span class="n">wdist</span> <span class="o">=</span> <span class="n">wdist</span><span class="p">):</span>
+        <span class="n">room_point</span> <span class="o">=</span> <span class="n">sample_room</span><span class="p">(</span><span class="n">room</span><span class="p">,</span> <span class="n">wdist</span><span class="p">)</span>
+    <span class="n">room_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">room_point</span><span class="p">)</span>
+    <span class="n">mics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mic</span> <span class="o">+</span> <span class="n">room_point</span><span class="p">)</span>
+    <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span> <span class="o">+</span> <span class="n">room_point</span><span class="p">)</span>
+<span class="n">room_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">room_points</span><span class="p">)</span>
+<span class="n">sources</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+<span class="n">mics</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mics</span><span class="p">)</span>
+
+
+<span class="c1"># If the function returns false, you have to use another point or make the array/source-distance smaller</span>
+<span class="c1"># Note, by randomly rotating the array + source before adding the room, also rooms that are not too high can be used</span>
+<span class="c1"># Note, if your array+source does not fit in the room with safety margin (both sides!) the function will be caught in an infinite loop</span>
+<span class="c1"># 5 Use the coordinates to generate room impulse responses https://pypi.org/project/rir-generator/</span>
+</pre></div>
+</div>
+<p>Now lets look how the microphones, sources and room points are distributed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;sources&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sources</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;room_points&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">room_points</span><span class="p">))]:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Histogram in x-coordinate </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram in y coodrinate of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram in z coordinate of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+
+<span class="n">micros</span> <span class="o">=</span> <span class="n">mics</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">mics</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mics</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">)]:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">micros</span><span class="p">[:,</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Histogram in </span><span class="si">{}</span><span class="s1">-coordinate </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;mic&#39;</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_0.png"><img alt="png" src="_images/HowToNotebook_31_0.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_1.png"><img alt="png" src="_images/HowToNotebook_31_1.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_2.png"><img alt="png" src="_images/HowToNotebook_31_2.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_3.png"><img alt="png" src="_images/HowToNotebook_31_3.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_4.png"><img alt="png" src="_images/HowToNotebook_31_4.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_5.png"><img alt="png" src="_images/HowToNotebook_31_5.png" />
+</a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Figure</span> <span class="n">size</span> <span class="mi">640</span><span class="n">x480</span> <span class="k">with</span> <span class="mi">0</span> <span class="n">Axes</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_7.png"><img alt="png" src="_images/HowToNotebook_31_7.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_8.png"><img alt="png" src="_images/HowToNotebook_31_8.png" />
+</a>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_31_9.png"><img alt="png" src="_images/HowToNotebook_31_9.png" />
+</a>
+</section>
+<section id="generate-room-impulse-responses">
+<h3>Generate Room Impulse Responses<a class="headerlink" href="#generate-room-impulse-responses" title="Link to this heading"></a></h3>
+<p>From the previous section, we have the arrays mics, sources, and the room geometry. We sampled 1000 times the SUA in a room with 10 microphones, such that mic has a shape of (1000, 10, 3) corresponding to (samples, microphones, coordinates). Using these sampled points, we can generater room impulse respones via:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rir_generator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rgen</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">rgen</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+    <span class="n">c</span><span class="o">=</span><span class="mi">340</span><span class="p">,</span>                  <span class="c1"># Sound velocity (m/s)</span>
+    <span class="n">fs</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span>                  <span class="c1"># Sample frequency (samples/s)</span>
+    <span class="n">r</span><span class="o">=</span><span class="n">mics</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>               <span class="c1"># Microphones</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">],</span>          <span class="c1"># Source position [x y z] (m)</span>
+    <span class="n">L</span><span class="o">=</span><span class="n">room</span><span class="p">,</span>            <span class="c1"># Room dimensions [x y z] (m)</span>
+    <span class="n">reverberation_time</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="c1"># Reverberation time (s)</span>
+    <span class="n">nsample</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span>           <span class="c1"># Number of output samples</span>
+<span class="p">)</span>
+<span class="c1"># result are 10 room impulse responses of h.shape that simulate the path of the source to each microphone.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference external image-reference" href="HowToNotebook_files/HowToNotebook_33_0.png"><img alt="png" src="_images/HowToNotebook_33_0.png" />
+</a>
+</section>
+</section>
+<section id="to-speed-things-up-the-process-of-rir-generation-is-parallelized-with-gnu-parallel-you-can-use-it-via">
+<h2>To speed things up, the process of RIR generation is parallelized with GNU parallel. You can use it via<a class="headerlink" href="#to-speed-things-up-the-process-of-rir-generation-is-parallelized-with-gnu-parallel-you-can-use-it-via" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">python</span> <span class="o">./</span><span class="n">RIR_parameter</span><span class="o">.</span><span class="n">py</span> <span class="o">|</span> <span class="n">parallel</span> <span class="o">--</span><span class="n">colsep</span> <span class="s1">&#39; &#39;</span> <span class="n">python</span> <span class="o">./</span><span class="n">RIR_write_quaternion</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">^</span><span class="n">C</span>
+</pre></div>
+</div>
+<p>You can set the specific parameters in the <code class="docutils literal notranslate"><span class="pre">config/config.py</span></code> (like room dimensions etc.) The files are saved in the folder specified in the config file. They are saved in a .pickle format.</p>
+</section>
+<section id="examplary-loading-of-a-file-generated-from-the-default-config">
+<h2>Examplary loading of a  file generated from the default config<a class="headerlink" href="#examplary-loading-of-a-file-generated-from-the-default-config" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="n">rir_file</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;output/Room943Rev0.38ArraySUASMD0.08ind0sadist1.2.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rir_file</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dict_keys</span><span class="p">([</span><span class="s1">&#39;RIR&#39;</span><span class="p">,</span> <span class="s1">&#39;Dist&#39;</span><span class="p">,</span> <span class="s1">&#39;Vecs&#39;</span><span class="p">,</span> <span class="s1">&#39;DirectRIR&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>RIR specifies the room impulse response, dist specifies the source array-center distance, Vecs are vectors pointing from array to source and DirectRIR contains only the direct comoponent of the room impulse response</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rir_file</span><span class="p">[</span><span class="s1">&#39;RIR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="mi">6080</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We have 37 room impulse responses of length 6080 and four microphones, as secified in the config. The DOA space was equally divided into 37 parts (source positions w.r.t. the array). For a ULA this is a resolution of 5 degrees: 180/(37-1). The length of the room impulse responses depends on the reverberation time.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">rir_file</span><span class="p">[</span><span class="s1">&#39;Vecs&#39;</span><span class="p">])</span>
+<span class="c1"># the vetors form a half-circle for a ULA, a half-sphere for a CUA and a sphere for a SUA</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">37</span>
+</pre></div>
+</div>
+<p>Now you can use the generated room impulse responses.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="readmelink.html" class="btn btn-neutral float-left" title="Readme File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="MonteCarloRIRSimulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Wolfgang Mack.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

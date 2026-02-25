@@ -1,0 +1,7 @@
+RIR\_parameter module
+=====================
+
+.. automodule:: RIR_parameter
+   :members:
+   :show-inheritance:
+   :undoc-members:

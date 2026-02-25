@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RIR_write_quaternion module &mdash; RIRMonte 01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=30f05f40" />
+
+  
+      <script src="_static/jquery.js?v=5be48651"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=da426f59"></script>
+      <script src="_static/doctools.js?v=695de88e"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="helper package" href="helper.html" />
+    <link rel="prev" title="RIR_parameter module" href="RIR_parameter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RIRMonte
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readmelink.html">Readme File</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">MonteCarloRIRSimulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="RIR_parameter.html">RIR_parameter module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RIR_write_quaternion module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#RIR_write_quaternion.generate_rir"><code class="docutils literal notranslate"><span class="pre">generate_rir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIR_write_quaternion.generate_source_vec"><code class="docutils literal notranslate"><span class="pre">generate_source_vec()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIR_write_quaternion.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIR_write_quaternion.sample_room"><code class="docutils literal notranslate"><span class="pre">sample_room()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIR_write_quaternion.verify_DOA"><code class="docutils literal notranslate"><span class="pre">verify_DOA()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIR_write_quaternion.verify_positions"><code class="docutils literal notranslate"><span class="pre">verify_positions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#RIR_write_quaternion.write"><code class="docutils literal notranslate"><span class="pre">write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html">helper package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RIRMonte</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">MonteCarloRIRSimulation</a></li>
+      <li class="breadcrumb-item active">RIR_write_quaternion module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/RIR_write_quaternion.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-RIR_write_quaternion">
+<span id="rir-write-quaternion-module"></span><h1>RIR_write_quaternion module<a class="headerlink" href="#module-RIR_write_quaternion" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="RIR_write_quaternion.generate_rir">
+<span class="sig-prename descclassname"><span class="pre">RIR_write_quaternion.</span></span><span class="sig-name descname"><span class="pre">generate_rir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Elevation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_array_dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Room</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReverberationTime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIR_write_quaternion.generate_rir" title="Link to this definition"></a></dt>
+<dd><p>Function that generates ‘M’ room impulse responses for a given ‘DOA’. Array and source are randomly positionend and rotated in a room using quaternions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Azimuth</strong> – (float) Azimuth angle of the source to the array center in rad</p></li>
+<li><p><strong>Elevation</strong> – (float) Elevation angle of the source to the array center in rad</p></li>
+<li><p><strong>source_array_dist</strong> – (float) distance of source signal to array center</p></li>
+<li><p><strong>Room</strong> – (array) x, y, z dimension of room</p></li>
+<li><p><strong>ReverberationTime</strong> – (float) Reverberation time of the current room</p></li>
+<li><p><strong>dist</strong> – (float) intermicrophone distance for ULA or radius for CUA</p></li>
+<li><p><strong>num_mics</strong> – (int) number of microphones</p></li>
+<li><p><strong>array_type</strong> – (str) one of ULA, CUA, SUA</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple of a unit-norm vector pointing from array to source and an array of room impulse responses</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RIR_write_quaternion.generate_source_vec">
+<span class="sig-prename descclassname"><span class="pre">RIR_write_quaternion.</span></span><span class="sig-name descname"><span class="pre">generate_source_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Az</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">El</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIR_write_quaternion.generate_source_vec" title="Link to this definition"></a></dt>
+<dd><p>Function that generates a source vector with given length and given Azimuth and Elevation w.r.t. array center The rotation is performed using quaternions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sad</strong> (<em>float</em>) – Distance between source and arraycenter</p></li>
+<li><p><strong>Az</strong> (<em>float</em>) – Azimuth angle in rad</p></li>
+<li><p><strong>El</strong> (<em>float</em>) – Elevation angle in rad</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vector which points from array center to source</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RIR_write_quaternion.main">
+<span class="sig-prename descclassname"><span class="pre">RIR_write_quaternion.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RIR_write_quaternion.main" title="Link to this definition"></a></dt>
+<dd><p>This function gets input parameter from RIR_parameter.py and computes RIRs from them</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roomx</strong> (<em>str</em>) – x position of room</p></li>
+<li><p><strong>roomy</strong> (<em>str</em>) – y position of room</p></li>
+<li><p><strong>roomz</strong> (<em>str</em>) – z position of room</p></li>
+<li><p><strong>j</strong> (<em>str</em>) – source array distance</p></li>
+<li><p><strong>ReverberationTime</strong> (<em>str</em>) – T60 of the room</p></li>
+<li><p><strong>dist</strong> (<em>str</em>) – inter-microphone distance (ULA) or radius (CUA, ..)</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – path so save</p></li>
+<li><p><strong>array_type</strong> (<em>str</em>) – selects the type of array</p></li>
+<li><p><strong>num_mics</strong> (<em>str</em>) – Number of microphones</p></li>
+<li><p><strong>indx</strong> (<em>str</em>) – How often to go through these parameters based on parameter file … just used to change the saving name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RIR_write_quaternion.sample_room">
+<span class="sig-prename descclassname"><span class="pre">RIR_write_quaternion.</span></span><span class="sig-name descname"><span class="pre">sample_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wdist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIR_write_quaternion.sample_room" title="Link to this definition"></a></dt>
+<dd><p>Function that samples a square room uniformly. The sample has to be within a certain distance to the wall</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>room</strong> – (array) x,y,z room dimensions</p></li>
+<li><p><strong>wdist</strong> – (float) minimal distance to walls of the sampling point</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(array) x,y,z sampled room position</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RIR_write_quaternion.verify_DOA">
+<span class="sig-prename descclassname"><span class="pre">RIR_write_quaternion.</span></span><span class="sig-name descname"><span class="pre">verify_DOA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sourcevecoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doa</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIR_write_quaternion.verify_DOA" title="Link to this definition"></a></dt>
+<dd><p>Function that raises an internal error if array or microphone is out of the room or too close to the wall</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mics</strong> – positions of the microphones</p></li>
+<li><p><strong>sourcevecoff</strong> – vector from array center to the source</p></li>
+<li><p><strong>doa</strong> – angle of arrival in rad</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RIR_write_quaternion.verify_positions">
+<span class="sig-prename descclassname"><span class="pre">RIR_write_quaternion.</span></span><span class="sig-name descname"><span class="pre">verify_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wdist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIR_write_quaternion.verify_positions" title="Link to this definition"></a></dt>
+<dd><p>Function that raises an internal error if array or microphone is out of the room or too close to the wall</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>room</strong> – room dimension</p></li>
+<li><p><strong>a</strong></p></li>
+<li><p><strong>b</strong></p></li>
+<li><p><strong>wdist</strong> – critical distance to walls when to raise error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RIR_write_quaternion.write">
+<span class="sig-prename descclassname"><span class="pre">RIR_write_quaternion.</span></span><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#RIR_write_quaternion.write" title="Link to this definition"></a></dt>
+<dd><p>Function that writes a pickles file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – data to write in the pickle file</p></li>
+<li><p><strong>outfile</strong> – (str) str to save the file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="RIR_parameter.html" class="btn btn-neutral float-left" title="RIR_parameter module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="helper.html" class="btn btn-neutral float-right" title="helper package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Wolfgang Mack.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

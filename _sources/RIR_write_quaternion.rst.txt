@@ -1,0 +1,7 @@
+RIR\_write\_quaternion module
+=============================
+
+.. automodule:: RIR_write_quaternion
+   :members:
+   :show-inheritance:
+   :undoc-members:
